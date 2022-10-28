@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Events\AllScheduledRepaymentPaidEvent;
+use App\Listeners\MarkLoanAsPaidListener;
+use App\Models\ScheduledRepayment;
+use App\Observers\ScheduledRepaymentObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,10 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+    ];
+
+    protected $observers = [
+        ScheduledRepayment::class => [ScheduledRepaymentObserver::class]
     ];
 
     /**

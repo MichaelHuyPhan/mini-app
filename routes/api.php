@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoanController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [UserController::class, 'login'])->name('user.login');
+
+Route::middleware('auth:api')->group(function () {
+    Route::post('/loans', [LoanController::class, 'create'])->name('loans.create');
+    Route::put('/loans/repay', [LoanController::class, 'repay'])->name('loans.repay');
+});
+
+Route::fallback(function (){
+    abort(404, 'API resource not found');
 });
