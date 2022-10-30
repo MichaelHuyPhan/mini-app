@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\AllScheduledRepaymentPaidEvent;
 use App\Http\Requests\LoanCreateRequest;
 use App\Http\Requests\LoanRepayRequest;
 use App\Models\Loan;
 use App\Models\ScheduledRepayment;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class LoanController extends Controller
 {
@@ -29,9 +29,14 @@ class LoanController extends Controller
         ]);
     }
 
-    public function get()
+    public function get(Request $request)
     {
+        $user = Auth::user();
+        $loans = $user->loans()->with('scheduledRepayments')->get();
 
+        return response([
+            'loans' => $loans,
+        ]);
     }
 
     public function repay(LoanRepayRequest $request)

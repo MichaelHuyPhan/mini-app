@@ -23,7 +23,6 @@ class Loan extends Model
     ];
 
     protected $hidden = [
-        'id',
         'user_id',
     ];
 

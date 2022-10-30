@@ -19,7 +19,6 @@ class ScheduledRepayment extends Model
     ];
 
     protected $hidden = [
-        'id',
         'loan_id',
     ];
 
