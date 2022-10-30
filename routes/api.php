@@ -21,7 +21,7 @@ Route::post('/login', [UserController::class, 'login'])->name('user.login');
 Route::middleware('auth:api')->group(function () {
     Route::post('/loans', [LoanController::class, 'create'])->name('loans.create');
     Route::put('/loans/repay', [LoanController::class, 'repay'])->name('loans.repay');
-    Route::get('/loans', [LoanController::class, 'get'])->name('loan.view');
+    Route::get('/loans', [LoanController::class, 'get'])->name('loans.view');
 });
 
 Route::fallback(function (){
