@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->index('created_at');
+            $table->index('updated_at');
         });
     }
 
@@ -29,6 +33,8 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('admins');
+        Schema::enableForeignKeyConstraints();
     }
 };

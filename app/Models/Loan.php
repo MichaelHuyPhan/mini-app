@@ -5,12 +5,13 @@ namespace App\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Nette\Schema\ValidationException;
 
 class Loan extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     public const STATUS_PENDING = 'pending';
     public const STATUS_APPROVED = 'approved';
@@ -36,10 +37,11 @@ class Loan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function createNewLoan(User $customer, float $amount, float $term, int $frequency)
+    public static function createNewLoan(User $customer, float $amount, float $term, int $frequency): ?Loan
     {
         DB::beginTransaction();
 
+        /* @var Loan $loan */
         $loan = $customer->loans()->create([
             'amount' => $amount,
             'term' => $term,
