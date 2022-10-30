@@ -21,21 +21,17 @@ This app don't build in register feature, so I've already created seeding data, 
 ```
 sail arisan db:seed
 ```
+It create 2 users: `user1@gmail.com`, `user2@gmail.com`, and admin: `admin1@gmail.com`
 
 ## How to use
-Project have __ API
+Project have 6 API. You can import Postman Collection here: https://www.postman.com/collections/79ee912cdafaee49290e
 
-User login
-
-User create loan
-
-User view loans
-
-User Repay loan
-
-Admin login
-
-Admin approve loan
+- User login: Used to login to get Bearer token
+- User create loan: Create new loan
+- User view loans: View what loan user have, and schedule payment of each loan
+- User Repay loan: Repay loan
+- Admin login: Admin login to get Bearer token
+- Admin approve loan: Admin approve loan, so user can repay.
 
 
 
