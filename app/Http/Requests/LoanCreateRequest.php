@@ -30,7 +30,8 @@ class LoanCreateRequest extends FormRequest
             ],
             'term' => [
                 'required',
-                'numeric'
+                'numeric',
+                'integer',
             ]
         ];
     }

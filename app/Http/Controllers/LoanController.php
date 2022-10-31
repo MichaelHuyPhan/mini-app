@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\LoanCreateRequest;
 use App\Http\Requests\LoanRepayRequest;
+use App\Http\Requests\LoanViewRequest;
 use App\Models\Loan;
 use App\Models\ScheduledRepayment;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 
 class LoanController extends Controller
 {
@@ -30,7 +30,7 @@ class LoanController extends Controller
         ]);
     }
 
-    public function get(Request $request): JsonResponse
+    public function get(LoanViewRequest $request): JsonResponse
     {
         $user = Auth::user();
         $loans = $user->loans()->with('scheduledRepayments')->get();

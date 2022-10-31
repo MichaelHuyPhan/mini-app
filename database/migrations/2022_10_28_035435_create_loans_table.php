@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->double('amount');
+            $table->unsignedDecimal('amount', 12, 2);
             $table->unsignedInteger('term');
             $table->string('status')->default(Loan::STATUS_PENDING);
             $table->timestamps();

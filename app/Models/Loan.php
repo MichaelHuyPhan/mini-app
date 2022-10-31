@@ -37,7 +37,7 @@ class Loan extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function createNewLoan(User $customer, float $amount, float $term, int $frequency): ?Loan
+    public static function createNewLoan(User $customer, float $amount, int $term, int $frequency): ?Loan
     {
         DB::beginTransaction();
 
@@ -52,7 +52,7 @@ class Loan extends Model
             DB::rollBack();
         }
 
-        $scheduledRepaymentAmount = $amount/$term;
+        $scheduledRepaymentAmount = round($amount/$term, 2);
         $nextRepayment = Carbon::now()->startOfDay()->addDay($frequency);
 
         for ($i=0; $i<$term; $i++) {

@@ -31,7 +31,7 @@ class LoanControllerTest extends TestCase
     {
         $amount = 10000;
         $term = 3;
-        $repayment_amount = $amount/$term;
+        $repayment_amount = round($amount/$term, 2);
         $this->post(route('loans.create'), [
             'amount' => $amount,
             'term' => $term,

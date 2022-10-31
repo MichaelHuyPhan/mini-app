@@ -18,7 +18,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('loan_id')->constrained();
             $table->timestamp('repayment_date');
-            $table->double('amount');
+            $table->unsignedDecimal('amount', 12, 2);
             $table->string('status', 20)->default(ScheduledRepayment::STATUS_PENDING);
             $table->timestamps();
             $table->softDeletes();
